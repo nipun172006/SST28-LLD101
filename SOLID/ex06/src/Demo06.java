@@ -5,14 +5,19 @@ public class Demo06 {
 
         Notification n = new Notification("Welcome", "Hello and welcome to SST!", "riya@sst.edu", "9876543210");
 
-        NotificationSender email = new EmailSender(audit);
-        NotificationSender sms = new SmsSender(audit);
-        NotificationSender wa = new WhatsAppSender(audit);
+        NotificationSender<EmailMessage> email = new EmailSender(audit);
+        NotificationSender<SmsMessage> sms = new SmsSender(audit);
+        NotificationSender<WhatsAppMessage> wa = new WhatsAppSender(audit);
 
-        email.send(n);
-        sms.send(n);
+        // Convert the unified Notification object into strongly validated Messages before sending.
+        // The truncation/validation rules now safely reside in the Message constructors!
+        email.send(new EmailMessage(n.email, n.subject, n.body));
+        
+        sms.send(new SmsMessage(n.phone, n.body));
+        
         try {
-            wa.send(n);
+            WhatsAppMessage wam = new WhatsAppMessage(n.phone, n.body);
+            wa.send(wam);
         } catch (RuntimeException ex) {
             System.out.println("WA ERROR: " + ex.getMessage());
             audit.add("WA failed");

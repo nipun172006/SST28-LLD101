@@ -1,20 +1,19 @@
 /**
  * Base for sending notifications.
- * Contract: send(n) will attempt to deliver the notification.
- * Senders may have format-specific requirements (e.g. phone number format).
+ * Contract: send(m) will attempt to deliver the notification message.
+ * The message itself guarantees format validity to prevent runtime preconditions.
  */
-public abstract class NotificationSender {
+public abstract class NotificationSender<T extends Message> {
     protected final AuditLog audit;
 
     protected NotificationSender(AuditLog audit) {
         this.audit = audit;
     }
 
-    public abstract void send(Notification n);
+    public abstract void send(T message);
 
-    protected void validateDestination(Notification n) {
-        // Base implementation allows any non-null notification
-        if (n == null)
-            throw new IllegalArgumentException("Notification cannot be null");
+    protected void validateMessage(T message) {
+        if (message == null)
+            throw new IllegalArgumentException("Message cannot be null");
     }
 }

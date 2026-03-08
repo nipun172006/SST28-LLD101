@@ -13,6 +13,11 @@ public class Demo05 {
     }
 
     private static String safe(Exporter e, ExportRequest r) {
+        // Enforcing the new base contract expectation natively!
+        if (!e.supports(r)) {
+            return "ERROR: " + e.getUnsupportedReason();
+        }
+        
         try {
             ExportResult out = e.export(r);
             return "OK bytes=" + out.bytes.length;

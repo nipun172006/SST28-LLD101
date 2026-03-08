@@ -1,20 +1,12 @@
-public class WhatsAppSender extends NotificationSender {
+public class WhatsAppSender extends NotificationSender<WhatsAppMessage> {
     public WhatsAppSender(AuditLog audit) {
         super(audit);
     }
 
     @Override
-    protected void validateDestination(Notification n) {
-        super.validateDestination(n);
-        if (n.phone == null || !n.phone.startsWith("+")) {
-            throw new IllegalArgumentException("phone must start with + and country code");
-        }
-    }
-
-    @Override
-    public void send(Notification n) {
-        validateDestination(n);
-        System.out.println("WA -> to=" + n.phone + " body=" + n.body);
+    public void send(WhatsAppMessage m) {
+        validateMessage(m);
+        System.out.println("WA -> to=" + m.phone + " body=" + m.body);
         audit.add("wa sent");
     }
 }

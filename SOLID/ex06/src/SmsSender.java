@@ -1,12 +1,12 @@
-public class SmsSender extends NotificationSender {
+public class SmsSender extends NotificationSender<SmsMessage> {
     public SmsSender(AuditLog audit) {
         super(audit);
     }
 
     @Override
-    public void send(Notification n) {
-        validateDestination(n);
-        System.out.println("SMS -> to=" + n.phone + " body=" + n.body);
+    public void send(SmsMessage m) {
+        validateMessage(m);
+        System.out.println("SMS -> to=" + m.phone + " body=" + m.body);
         audit.add("sms sent");
     }
 }
