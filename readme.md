@@ -1,30 +1,56 @@
-# SST28-LLD101 – SOLID Refactoring Assignment
+# Java Design Principles and Patterns
 
-This repository contains refactored Java solutions for the **SOLID Principles** exercises.
+A collection of Java exercises that makes object-oriented design trade-offs
+visible through small, runnable examples.
 
-## 📁 Structure
+## What it covers
 
+- Ten SOLID refactoring exercises covering responsibility boundaries,
+  extensibility, substitution, interface segregation, and dependency inversion
+- Adapter implementations for payment providers
+- Proxy-based access control for reports
+- Flyweight reuse for map marker styles
+- Singleton behavior under concurrency, reflection, and serialization
+- Immutable incident-ticket modeling
+
+## Repository layout
+
+```text
+SOLID/                 SOLID refactoring exercises with per-exercise READMEs
+adapter-payments/      Adapter pattern
+proxy-reports/         Proxy pattern
+flyweight-markers/     Flyweight pattern
+singleton-metrics/     Singleton behavior and edge cases
+immutable-tickets/     Immutability and validation
+scripts/check.sh       Compile every example in isolation
 ```
-SST28-LLD101/
-└── SOLID/
-    ├── ex01/src/Demo01.java   # Single Responsibility Principle (SRP)
-    ├── ex02/src/Demo02.java   # Open-Closed Principle (OCP)
-    ├── ex03/src/Demo03.java   # Open-Closed Principle (OCP) – continued
-    ├── ex04/src/Demo04.java   # Dependency Inversion Principle (DIP)
-    ├── ex05/src/Demo05.java   # Liskov Substitution Principle (LSP)
-    ├── ex06/src/Demo06.java   # Liskov Substitution Principle (LSP) – continued
-    ├── ex07/src/Demo07.java   # Interface Segregation Principle (ISP)
-    ├── ex08/src/Demo08.java   # Interface Segregation Principle (ISP) – continued
-    ├── ex09/src/Demo09.java   # Dependency Inversion Principle (DIP) – continued
-    └── ex10/src/Demo10.java   # All SOLID Principles Combined
+
+## Validate the examples
+
+Different exercises intentionally reuse class names, so the validation script
+compiles each source tree into its own temporary output directory:
+
+```bash
+scripts/check.sh
 ```
 
-## 🚀 How to Compile & Run
-
-Navigate to any exercise's `src` folder and run:
+To run one exercise manually:
 
 ```bash
 cd SOLID/ex01/src
 javac *.java
 java Demo01
 ```
+
+## Course context
+
+These examples originated as low-level-design and SOLID coursework. The
+repository presents the engineering ideas clearly while retaining the original
+exercise-level documentation and history.
+
+## Limitations
+
+- The modules are independent examples rather than one deployable application.
+- Validation compiles the sources but does not yet assert behavior for every
+  exercise.
+- No license is asserted while coursework ownership remains under review.
